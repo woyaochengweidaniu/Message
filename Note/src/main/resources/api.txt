@@ -1,0 +1,131 @@
+东方般若短信Http接口文档
+V1.7
+
+1.短信群发
+访问地址：
+http://118.145.22.172:9888/smsservice/SendSMS? 编码GBK
+参数列表：
+名称	说明
+UserId	东方般若提供的用户名
+Password	东方般若提供的密码
+Mobiles	手机号码（支持多手机号，以英文逗号分隔，Get最多不超过1000个手机号;Post无限制，建议不超过1万个，手机号越多响应时间越长）
+Content	短信内容
+SenderAddr	扩展尾号（无扩展尾号此参数可为空）V1.3
+ScheduleTime	计划发送开始时间日期格式YYYYMMDDHHMISS  V1.6
+缺省值系统时间
+ExpireTime	发送超期时间日期格式YYYYMMDDHHMISS  V1.6
+缺省值系统时间+1天
+示例：
+返回参数列表：
+名称	说明
+ReplyTime	应答时间yyyy-MM-ddHH:mm:ss
+Status	Succ成功，Fail失败
+Description	状态描述
+GatewayId	网关消息Id，用于匹配报告
+返回示例:
+2.个性化短信批量发送
+访问地址：
+http://118.145.22.172:9888/smsservice/SendSMS? 编码GBK
+参数列表：
+名称	说明
+UserId	东方般若提供的用户名
+Password	东方般若提供的密码
+Msg	消息包，提交标准JSON数据格式的发送内容，数据包含3个参数：mobile,content,senderAddr，ScheduleTime，ExpireTime；
+整个参数必须用URLEcode("GBK")。
+Msg参数样例：
+[{"mobile":"13900000001","content":"test1",”senderAddr”:”0100”},
+{"mobile":"13900000002","content":"test2",”senderAddr”:”0101”},
+{"mobile":"13900000003","content":"test3",”senderAddr”:”0102”}]
+
+V1.6 版添加ScheduleTime，ExpireTime两个参数，参数含义参考短信群发接口
+示例：
+返回参数列表：
+名称	说明
+ReplyTime	应答时间yyyy-MM-ddHH:mm:ss
+Status	Succ成功，Fail失败
+Description	状态描述
+GatewayId	网关消息Id，用于匹配报告
+返回示例:
+
+3.1接收报告
+
+访问地址：
+http://118.145.22.172:9888/smsservice/ReceiveReport? 编码GBK
+参数列表：
+名称	说明
+UserId	东方般若提供的用户名
+Password	东方般若提供的密码
+示例：
+
+返回数据：
+多个报告，以“\n”分隔
+报告参数列表：
+名称	说明
+ReportTime	报告时间yyyy-MM-ddHH:mm:ss
+GatewayId	网关消息Id
+Mobile	手机号
+Status	Succ成功，Fail失败
+Description	状态描述
+FeeCount	计费条数
+返回示例：
+
+
+
+3.2推送报告（V1.7）
+推送地址：由调用方提供，在平台进行配置。编码UTF-8
+推送参数列表：
+名称	说明
+ReportTime	报告时间yyyy-MM-ddHH:mm:ss
+GatewayId	网关消息Id
+Mobile	手机号
+Status	Succ成功，Fail失败
+Description	状态描述，为运营商返回错误代码，有可能为空
+FeeCount	计费条数
+
+返回值参数列表
+名称	说明
+status	0失败，1成功
+msg	状态描述
+
+4.1接收上行短信
+访问地址：
+http://118.145.22.172:9888/smsservice/ReceiveMO? 编码GBK
+参数列表：
+名称	说明
+UserId	东方般若提供的用户名
+Password	东方般若提供的密码
+示例：
+http://118.145.22.172:9888/smsservice/ReceiveMO?UserId=xxx&Password=xxx
+返回数据：
+多个上行短信，以“\n”分隔
+上行参数列表：
+名称	说明
+ReceiveTime	接收时间 yyyy-MM-dd HH:mm:ss
+Mobile	手机号
+Content	短信内容
+Description	成功返回内容为:ok;
+鉴权失败内容为:错误信息;
+无上行短信内容为:null。
+SenderAddr	上行短信扩展尾号，记录客户发送下行短信时，手机终端显示服务号码扩展的部分，在通过上行回复时带回。无扩展码时内容为””V1.4
+返回示例：
+4.2上行短信推送（V1.7）
+推送地址：由调用方提供，在平台进行配置。编码UTF-8
+推送参数列表：
+
+
+名称	说明
+ReceiveTime	接收时间 yyyy-MM-dd HH:mm:ss
+Mobile	手机号
+Content	短信内容
+Description	默认为 ok
+SenderAddr	扩展尾号
+ExtNo	扩展尾号
+ServiceNo	通道特服号
+
+返回值参数列表
+名称	说明
+status	0失败，1成功
+msg	状态描述
+
+
+注：链接地址的IP和端口、账号UserID和Password以客服提供的开通单为准！
