@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Emial/emial.iml" filepath="$PROJECT_DIR$/Emial/emial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message.iml" filepath="$PROJECT_DIR$/message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Note/note.iml" filepath="$PROJECT_DIR$/Note/note.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rabbitmq/rabbitmq.iml" filepath="$PROJECT_DIR$/Rabbitmq/rabbitmq.iml" />
+    </modules>
+  </component>
+</project>
